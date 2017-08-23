@@ -33,23 +33,26 @@ class OrderedList:
                     current = current.getNext()
         return found
 
-    def add(self,item):
-        current = self.head
-        previous = None
-        stop = False
-        while current != None and not stop:
-            if current.getData() > item:
-                stop = True
+    def add(self,li):
+        if isinstance(li,int):
+            li = [li]
+        for item in li:
+            current = self.head
+            previous = None
+            stop = False
+            while current != None and not stop:
+                if current.getData() > item:
+                    stop = True
+                else:
+                    previous = current
+                    current = current.getNext()
+            temp = ListNode(item)
+            if previous == None:
+                temp.setNext(self.head)
+                self.head = temp
             else:
-                previous = current
-                current = current.getNext()
-        temp = ListNode(item)
-        if previous == None:
-            temp.setNext(self.head)
-            self.head = temp
-        else:
-            temp.setNext(current)
-            previous.setNext(temp)
+                temp.setNext(current)
+                previous.setNext(temp)
 
     def size(self):
         current = self.head
@@ -73,18 +76,22 @@ class Solution(object):
         :type head: ListNode
         :rtype: ListNode
         """
-        p,tmp = head,head
-        while p.next:
-            if p.next.val == p.val:
-                p.next = p.next.next
+        dummy = p = ListNode(0)
+        dummy.next = head
+        while head and head.next:
+            if head.val == head.next.val:
+                while head and head.next and head.val == head.next.val:
+                    head = head.next
+                head = head.next
+                p.next = head
             else:
                 p = p.next
-        return head
+                head = head.next
+        return dummy.next
 
 h = OrderedList()
-h.add(1)
+h.add([1,1,2,2,3,4,4,5,6,7,7])
+hh = h.head
+t = Solution().deleteDuplicates(hh)
 
-hh =h.head
-Solution().deleteDuplicates(hh)
-
-print(h.tolist())
+print t.tolist()

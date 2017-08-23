@@ -15,6 +15,14 @@ class ListNode:
     def setNext(self,newnext):
         self.next = newnext
 
+    def tolist(self):
+        p = self
+        re = []
+        while p!=None:
+            re.append(p.val)
+            p=p.next
+        return re
+
 class OrderedList:
     def __init__(self):
         self.head = None
@@ -33,23 +41,26 @@ class OrderedList:
                     current = current.getNext()
         return found
 
-    def add(self,item):
-        current = self.head
-        previous = None
-        stop = False
-        while current != None and not stop:
-            if current.getData() > item:
-                stop = True
+    def add(self,li):
+        if isinstance(li,int):
+            li = [li]
+        for item in li:
+            current = self.head
+            previous = None
+            stop = False
+            while current != None and not stop:
+                if current.getData() > item:
+                    stop = True
+                else:
+                    previous = current
+                    current = current.getNext()
+            temp = ListNode(item)
+            if previous == None:
+                temp.setNext(self.head)
+                self.head = temp
             else:
-                previous = current
-                current = current.getNext()
-        temp = ListNode(item)
-        if previous == None:
-            temp.setNext(self.head)
-            self.head = temp
-        else:
-            temp.setNext(current)
-            previous.setNext(temp)
+                temp.setNext(current)
+                previous.setNext(temp)
 
     def size(self):
         current = self.head
@@ -68,23 +79,25 @@ class OrderedList:
         return re
 
 class Solution(object):
-    def deleteDuplicates(self, head):
+    def reverseList(self, head):
         """
         :type head: ListNode
         :rtype: ListNode
         """
-        p,tmp = head,head
-        while p.next:
-            if p.next.val == p.val:
-                p.next = p.next.next
-            else:
-                p = p.next
-        return head
+        p = head
+        if not p or not p.next : return p
+        p1 = head.next
+        p.next = None
+        tmp = None
+        while p1:
+            tmp = p1.next or None
+            p1.next = p
+            p = p1
+            p1 = tmp
+        return p
 
-h = OrderedList()
-h.add(1)
-
-hh =h.head
-Solution().deleteDuplicates(hh)
-
-print(h.tolist())
+l = OrderedList()
+l.add([1,2,3,4,5])
+h = l.head
+p = Solution().reverseList(h)
+print p.next.val
