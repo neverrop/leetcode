@@ -1,0 +1,31 @@
+{
+  "name": "OrbbecAstraMiniS_17011111162_ParamReader",
+
+  "depth_image_size": [
+    640,
+    480
+  ],
+  "rgb_image_size": [
+    640,
+    480
+  ],
+  "depth_focal_length": [ 577.312, 577.312 ],
+  "depth_principal_point": [ 316.717, 259.833 ],
+  "depth_distortion_k": [ -0.0832679, 0.229316, -0.215964 ],
+  "depth_distortion_p": [ 0.000121521, -0.000219746 ],
+
+  "rgb_focal_length": [ 518.673, 518.673 ],
+  "rgb_principal_point": [ 315.11, 240.883 ],
+  "rgb_distortion_k": [ 0.0510147, -0.230388, 0.207666 ],
+  "rgb_distortion_p": [ -0.000708792, -0.00221208 ],
+
+  "depth_to_rgb_R": [
+    [ 0.999894, -0.0132607, 0.00590441 ],
+    [ 0.0132589, 0.999912, 0.000350543 ],
+    [ -0.00590856, -0.000272071, 0.999982 ]
+  ],
+  "depth_to_rgb_t": [ -24.5913, -0.782896, 2.39623 ],
+
+  "unit": "mm"
+
+}
